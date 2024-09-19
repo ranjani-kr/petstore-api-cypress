@@ -1,0 +1,6 @@
+# Ignore everything under cypress/reports
+cypress/reports/*
+
+# Ignore everything under cypress/screenshots
+cypress/screenshots/*
+

@@ -1,0 +1,109 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 0,
+    "pending": 0,
+    "failures": 1,
+    "start": "2024-09-18T12:34:00.276Z",
+    "end": "2024-09-18T12:34:00.839Z",
+    "duration": 563,
+    "testsRegistered": 1,
+    "passPercent": 0,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "6d74107b-c97c-4c6f-bb3e-9e1ba83d2a17",
+      "title": "",
+      "fullFile": "cypress/e2e/uploadImageToPet.spec.js",
+      "file": "cypress/e2e/uploadImageToPet.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "80d06969-88a2-46fc-bc76-e44c07004624",
+          "title": "upload image to pet",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Uploads an image to the pet successfully and logs the status code",
+              "fullTitle": "upload image to pet Uploads an image to the pet successfully and logs the status code",
+              "timedOut": null,
+              "duration": 527,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "// Define the pet ID\nconst petId = 1;\n// Use the fixture method to read the image file from the cypress fixtures folder\ncy.fixture('pet2.jpg', 'binary').then(fileContent => {\n  const blob = Cypress.Blob.binaryStringToBlob(fileContent, 'image/jpeg');\n  // Manually create a FormData object and append the image\n  const formData = new FormData();\n  formData.append('file', blob, 'pet2.jpg');\n  // Convert FormData to a form-data readable stream\n  cy.request({\n    method: 'POST',\n    url: `/pet/${petId}/uploadImage`,\n    // Upload image to the pet\n    headers: {\n      'Content-Type': 'multipart/form-data'\n    },\n    formData: {\n      file: blob\n    },\n    failOnStatusCode: false\n  }).then(response => {\n    // Log the entire response to inspect it\n    cy.log('Full response:', JSON.stringify(response));\n    // Check if the response body and message exist\n    if (response.body && response.body.message) {\n      const responseMessage = response.body.message;\n      // Log the response message\n      cy.log(`Response Message: ${responseMessage}`);\n      // Assert that the response contains the expected message\n      expect(responseMessage).to.include('File uploaded to ./pet2.jpg');\n      expect(response.status).to.equal(200); // Assert that the status code is 200\n    } else {\n      // Log and throw an error if the message is not present\n      cy.log('Response body or message is undefined');\n      throw new Error('Response body or message is missing');\n    }\n  }).catch(err => {\n    cy.log(`Request failed: ${err.message}`);\n  });\n});",
+              "err": {
+                "message": "TypeError: cy.request(...).then(...).catch is not a function",
+                "estack": "TypeError: cy.request(...).then(...).catch is not a function\n    at Context.eval (webpack:///./cypress/e2e/uploadImageToPet.spec.js:46:15)",
+                "diff": null
+              },
+              "uuid": "f8a2b776-758d-42a5-89a9-2af15bf3ae7e",
+              "parentUUID": "80d06969-88a2-46fc-bc76-e44c07004624",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [],
+          "failures": [
+            "f8a2b776-758d-42a5-89a9-2af15bf3ae7e"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 527,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

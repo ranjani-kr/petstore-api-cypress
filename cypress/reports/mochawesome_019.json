@@ -1,0 +1,171 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 4,
+    "passes": 2,
+    "pending": 0,
+    "failures": 2,
+    "start": "2024-09-19T03:30:54.045Z",
+    "end": "2024-09-19T03:30:56.451Z",
+    "duration": 2406,
+    "testsRegistered": 4,
+    "passPercent": 50,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "327557ab-7e0b-4c43-ace5-fccdb685975f",
+      "title": "",
+      "fullFile": "cypress/e2e/addPetToStore.spec.js",
+      "file": "cypress/e2e/addPetToStore.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "47411054-2e41-4cd1-a207-a54fae4daeb8",
+          "title": "Add pet to the store - Test Senarios",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "successfully able to add the pet with all the mandatory fields ",
+              "fullTitle": "Add pet to the store - Test Senarios successfully able to add the pet with all the mandatory fields ",
+              "timedOut": null,
+              "duration": 1218,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: '/pet',\n  body: petData,\n  headers: {\n    'Content-Type': 'application/json'\n  }\n}).then(response => {\n  expect(response.status).to.equal(200);\n  expect(response.body.id).to.equal(petId);\n  expect(response.body.name).to.equal(petData.name);\n  expect(response.body.photoUrls).to.deep.equal(petData.photoUrls);\n  // Log the response body\n  cy.log('Response Body:', JSON.stringify(response.body));\n});",
+              "err": {},
+              "uuid": "f13922c8-98ef-41c9-aa6f-17d3434867dc",
+              "parentUUID": "47411054-2e41-4cd1-a207-a54fae4daeb8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return 400 when mandatory fields are missing while adding the pet",
+              "fullTitle": "Add pet to the store - Test Senarios should return 400 when mandatory fields are missing while adding the pet",
+              "timedOut": null,
+              "duration": 450,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const missingMandatoryFieldsPetData = {\n  status: 'availabe'\n};\ncy.request({\n  method: 'POST',\n  url: '/pet',\n  body: missingMandatoryFieldsPetData,\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  failOnStatus: 'false'\n}).then(response => {\n  expect(response.status).to.equal(400);\n  cy.log('Invalid pet creation attempt due to missing fields.');\n});",
+              "err": {
+                "message": "AssertionError: expected 200 to equal 400",
+                "estack": "AssertionError: expected 200 to equal 400\n    at Context.eval (webpack:///./cypress/e2e/addPetToStore.spec.js:58:39)",
+                "diff": "- 200\n+ 400\n"
+              },
+              "uuid": "326505e7-5227-46c0-92f4-5b2de0c19399",
+              "parentUUID": "47411054-2e41-4cd1-a207-a54fae4daeb8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should be able to add pet with all the fields",
+              "fullTitle": "Add pet to the store - Test Senarios should be able to add pet with all the fields",
+              "timedOut": null,
+              "duration": 253,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "const fullPetData = {\n  id: petId,\n  category: {\n    id: 1,\n    name: 'Dog'\n  },\n  name: `Pet_${petId}`,\n  photoUrls: ['https://example.com/photo1.jpg'],\n  tags: [{\n    id: 1,\n    name: 'Friendly'\n  }],\n  status: 'available'\n};\ncy.request({\n  method: 'POST',\n  url: '/pet',\n  body: fullPetData,\n  headers: {\n    'Content-Type': 'application/json'\n  }\n}).then(response => {\n  expect(response.status).to.equal(200);\n  expect(response.body.id).to.equal(petId);\n  expect(response.body.category.name).to.equal(fullPetData.category.name);\n  expect(response.body.tags[0].name).to.equal(fullPetData.tags[0].name);\n  expect(response.body.status).to.equal(fullPetData.status);\n  expect(response.body.photoUrls).to.deep.equal(fullPetData.photoUrls);\n  cy.log('Response Body:', JSON.stringify(response.body));\n});",
+              "err": {},
+              "uuid": "d6f9f96c-4a0e-4a50-b483-31fb4c9abcf8",
+              "parentUUID": "47411054-2e41-4cd1-a207-a54fae4daeb8",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "should return a 500 status when pet data is in incorrect format",
+              "fullTitle": "Add pet to the store - Test Senarios should return a 500 status when pet data is in incorrect format",
+              "timedOut": null,
+              "duration": 402,
+              "state": "failed",
+              "speed": null,
+              "pass": false,
+              "fail": true,
+              "pending": false,
+              "context": null,
+              "code": "const invalidPetData = {\n  id: 'invalid-id',\n  // Invalid ID format\n  name: `Pet_${petId}`,\n  photoUrls: ['https://example.com/photo1.jpg']\n};\ncy.request({\n  method: 'POST',\n  url: 'https://petstore.swagger.io/v2/pet',\n  body: invalidPetData,\n  headers: {\n    'Content-Type': 'application/json'\n  },\n  failOnStatusCode: false // To handle expected failures\n}).then(response => {\n  // Assert the response status\n  expect(response.status).to.equal(405); // Invalid input\n  cy.log('Invalid format detected, failed to create pet');\n});",
+              "err": {
+                "message": "AssertionError: expected 500 to equal 405",
+                "estack": "AssertionError: expected 500 to equal 405\n    at Context.eval (webpack:///./cypress/e2e/addPetToStore.spec.js:122:33)",
+                "diff": "- 500\n+ 405\n"
+              },
+              "uuid": "7bcb6867-124e-476c-accc-04a2a859d030",
+              "parentUUID": "47411054-2e41-4cd1-a207-a54fae4daeb8",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "f13922c8-98ef-41c9-aa6f-17d3434867dc",
+            "d6f9f96c-4a0e-4a50-b483-31fb4c9abcf8"
+          ],
+          "failures": [
+            "326505e7-5227-46c0-92f4-5b2de0c19399",
+            "7bcb6867-124e-476c-accc-04a2a859d030"
+          ],
+          "pending": [],
+          "skipped": [],
+          "duration": 2323,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

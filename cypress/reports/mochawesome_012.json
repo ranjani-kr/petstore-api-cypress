@@ -1,0 +1,105 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2024-09-19T01:45:03.182Z",
+    "end": "2024-09-19T01:45:04.519Z",
+    "duration": 1337,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "5f738e2b-ee2b-4c04-8bd1-cb0bb6f5e938",
+      "title": "",
+      "fullFile": "cypress/e2e/addPetToStore.spec.js",
+      "file": "cypress/e2e/addPetToStore.spec.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "48173168-a7b0-4e16-be9d-88f43f21e76d",
+          "title": "Add pet to the store - Test Senarios",
+          "fullFile": "",
+          "file": "",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "successfully able to add the pet with all the mandatory fields ",
+              "fullTitle": "Add pet to the store - Test Senarios successfully able to add the pet with all the mandatory fields ",
+              "timedOut": null,
+              "duration": 1313,
+              "state": "passed",
+              "speed": "fast",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "cy.request({\n  method: 'POST',\n  url: '/pet',\n  body: petData,\n  headers: {\n    'Content-Type': 'application/json'\n  }\n}).then(response => {\n  expect(response.status).to.equal(200);\n  expect(response.body.id).to.equal(petId);\n  expect(response.body.name).to.equal(petData.name);\n  expect(response.body.photoUrls).to.deep.equal(petData.photoUrls);\n  // Log the response body\n  cy.log('Response Body:', JSON.stringify(response.body));\n});",
+              "err": {},
+              "uuid": "581d97df-b53c-4361-b9dc-efe13c349e60",
+              "parentUUID": "48173168-a7b0-4e16-be9d-88f43f21e76d",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "581d97df-b53c-4361-b9dc-efe13c349e60"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 1313,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 2000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 2000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "7.0.1"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": {
+        "reportDir": "cypress/reports",
+        "overwrite": false,
+        "html": true,
+        "json": true
+      },
+      "version": "6.2.0"
+    }
+  }
+}

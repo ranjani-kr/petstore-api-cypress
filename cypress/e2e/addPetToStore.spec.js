@@ -101,7 +101,7 @@ describe('Add pet to the store - Test Senarios',() =>{
           });
     });
 
-  // Test: Add a pet with invalid data (e.g., incorrect format)
+  // Add a pet with invalid data (e.g., incorrect format)
   it('should return a 400 status with bad request when pet data is in incorrect format', () => {
     const invalidPetData = {
       id: 'invalid-id',  // Invalid ID format
@@ -125,15 +125,15 @@ describe('Add pet to the store - Test Senarios',() =>{
     });
   });
 
-  // 
-  it('Verifies that the photoUrls can upload multiple data', () => {
+  // Add more than one photo url
+  it('should verify that the photoUrls can upload multiple data', () => {
     // Define the pet object with valid photoUrls
     const petData = {
       id: 1,
       name: "doggie",
       photoUrls: [
         "https://example.com/photo1.jpg",
-        "https://example.com/photo2.jpg"
+        "https://example.com/photo2.png"
       ],
       status: "available"
     };
@@ -154,9 +154,28 @@ describe('Add pet to the store - Test Senarios',() =>{
       expect(response.body.photoUrls).to.be.an('array');
       expect(response.body.photoUrls.length).to.be.greaterThan(0); // Ensure it's not empty
 
-      //compare the response photoUrls with the ones you sent
+      //Compare the response photoUrls with the ones you sent
       expect(response.body.photoUrls).to.deep.equal(petData.photoUrls);
     });
   });
+
+   it('should return 405 when using invalid HTTP method', () => {
+      cy.request({
+        method: 'PATCH', // Invalid method for this endpoint
+        url: '/pet',
+        failOnStatusCode: false,
+        body: petData,
+      }).then((response) => {
+        expect(response.status).to.equal(405); 
+      });
+    });
+
+  it('should verifies that the photoUrls in the valid format', () => {
+
+  })
+
+  it('should return bad request when more than 5 photos are attached', () => {
+
+  })
 
 });

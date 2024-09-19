@@ -8,6 +8,9 @@ module.exports = defineConfig({
     json: true,
   },
   e2e: {
+    env:{
+      apiKey : 'special-key'
+    },
     setupNodeEvents(on, config) {
       
       // implement node event listeners here

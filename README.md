@@ -1,19 +1,19 @@
-#Petstore API Testing with Cypress
+# Petstore API Testing with Cypress
 
-##Overview
+## Overview
 This repository contains automated tests for the Petstore API using the Cypress testing framework. The tests cover creating, updating, deleting pets, and verifying various scenarios on adding pet api.
 
-##Features
+## Features
 Cypress: E2E testing framework used for automating API tests.
 Mochawesome: A reporting tool that generates detailed HTML and JSON reports of test executions.
 Dynamic Variables: Utilizes dynamic variables for managing petId to ensure data consistency.
 Error Handling: Includes scenarios for handling various HTTP status codes and edge cases.
 
-##Prerequisites
+## Prerequisites
 Node.js (version 12 or above)
 npm (Node Package Manager)
 
-##Installation
+## Installation
 1.Clone the repository:
 ```bash
 git clone https://github.com/your-username/petstore-api.git
@@ -41,7 +41,7 @@ npm install mochawesome --save-dev
 npm install cypress-mochawesome-reporter --save-dev
 ```
 
-##Configuration
+## Configuration
 The Cypress configuration is located in the cypress.config.js file. Here are the key components:
 
 **Mochawesome Reporter:** Generates HTML and JSON reports in cypress/reports.
@@ -49,7 +49,7 @@ The Cypress configuration is located in the cypress.config.js file. Here are the
 **Base URL:** Set to https://petstore.swagger.io/v2/, which is used for all API requests.
 **Spec Pattern:** Specifies the location of your test files under cypress/e2e/. 
 
-##Running Tests
+## Running Tests
 
 1.**Run tests in headless mode:**
 ```bash
@@ -60,7 +60,7 @@ npx cypress run
 ```bash
 npx cypress open
 ```
-##Reporting
+## Reporting
 
 Reports are generated using Mochawesome and saved in the cypress/reports directory.
 HTML reports can be viewed by opening the .html files in a web browser.

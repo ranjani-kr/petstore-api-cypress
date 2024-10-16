@@ -4,3 +4,9 @@ cypress/reports/*
 # Ignore everything under cypress/screenshots
 cypress/screenshots/*
 
+# Ignore everything under cypress/support
+cypress/support/*
+
+# Ignore everything under node_modules
+node_modules/
+
